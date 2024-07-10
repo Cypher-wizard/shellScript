@@ -34,17 +34,17 @@ delete_files_with_warning() {
 
     cd "$delete_dir" || exit
 
-    for ((i=start_num; i<=end_num; i++)); do
-        if [ -f "file$i.txt" ]; then
-            read -p "Are you sure you want to delete file$i.txt? (y/n): " confirm
-            if [ "$confirm" == "y" ]; then
+    read -p "Are you sure you want to delete files from file$start_num.txt to file$end_num.txt? (y/n): " confirm
+    if [ "$confirm" == "y" ]; then
+        for ((i=start_num; i<=end_num; i++)); do
+            if [ -f "file$i.txt" ]; then
                 rm "file$i.txt"
                 echo "file$i.txt deleted."
-            else
-                echo "file$i.txt not deleted."
             fi
-        fi
-    done
+        done
+    else
+        echo "Files not deleted."
+    fi
 }
 
 # Function to move remaining files to a user-defined directory
